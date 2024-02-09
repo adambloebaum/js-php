@@ -1,6 +1,6 @@
 # javaaa
 
-a collection of miscellaneous projects written in JavaScript
+a collection of projects written in JavaScript
 
 ## citation transactions
 
