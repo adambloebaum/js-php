@@ -1,5 +1,5 @@
 // This program displays the current and max microphone volume through the lens of Formula 1 Racing by visualizing a car moving across a track
-// and displaying its curren and peak speeds in kilometers per hour.
+// and displaying its current and peak speeds in kilometers per hour.
 
 // Constant assignment
 let mic;

@@ -2,10 +2,9 @@
 public class ParkingManagementSystem {
 
     public boolean assignParkingPermit() {\
-        // start the transaction
+
         DBManager.beginTransaction();
 
-        // get permit assignment details from user input
         int permitID = Input.getInt("Enter permit ID: ");
         if (permitID < 0 || permitID > 999999999) {
             System.out.println("Invalid Permit ID. It should be 1 to 9 digits.");
@@ -42,7 +41,6 @@ public class ParkingManagementSystem {
             return false;
         }
 
-        // validate DriverID against Drivers table (theoretical operation)
         if (!DBManager.getDrivers(driverID)) {
             System.out.println("Driver ID does not exist in the Drivers table.");
             return false;
@@ -54,20 +52,17 @@ public class ParkingManagementSystem {
             return false;
         }
 
-        // SQL to insert new permit assignment
         String sqlInsertPermit = String.format(
             "INSERT INTO Permit (PermitID, PermitType, StartDate, ExpDate, ExpTime, DriverID, AssignedSpaceType) VALUES (%d, '%s', '%s', '%s', '%s', %d, '%s')", 
             permitID, permitType, startDate, expDate, expTime, driverID, assignedSpaceType
         );
 
-        // attempt to insert new permit
         if (!DBManager.execute(sqlInsertPermit)) {
             System.out.println("Couldn't assign new permit");
             DBManager.rollbackTransaction();
             return false;
         }
 
-        // commit the transaction
         DBManager.commitTransaction();
         return true;
     }
