@@ -1,4 +1,4 @@
-# javaaa
+# js-php
 
 a collection of projects written in JS / PHP
 
