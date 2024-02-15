@@ -1,6 +1,6 @@
 # webdev
 
-a collection of projects written in JS / PHP
+a collection of projects written with js, php, html, and css
 
 ## citation transactions
 
