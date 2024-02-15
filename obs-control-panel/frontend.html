@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBS Control Panel</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>OBS Control Panel</h1>
+    </div>
+    <div class="container">
+        <div class="input-group">
+            <div>
+                <label for="athleteName">Athlete Name (Firstname Lastname)</label>
+                <input type="text" id="athleteName" placeholder="Enter Athlete's Name">
+            </div>
+            <div>
+                <label for="playerID">Player ID</label>
+                <input type="text" id="playerId" placeholder="Enter Player ID">
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="saveButton" class="blue">Save Filename</button>
+            <button id="startSessionButton" class="green">Start Recording</button>
+            <button id="stopSessionButton" class="red">Stop Recording</button>
+        </div>
+
+        <div class="status" id="status">Status: waiting for filename...</div>
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var saveButton = document.getElementById("saveButton");
+            var startSessionButton = document.getElementById("startSessionButton");
+            var stopSessionButton = document.getElementById("stopSessionButton");
+            var statusDisplay = document.getElementById("status");
+            
+            saveButton.addEventListener("click", function() {
+                sendCommand('saveFilename');
+            });
+
+            startSessionButton.addEventListener("click", function() {
+                sendCommand('startSession');
+            });
+
+            stopSessionButton.addEventListener("click", function() {
+                sendCommand('stopSession');
+            });
+
+            function sendCommand(action) {
+                var formData = new FormData();
+                formData.append('action', action);
+                formData.append('athleteName', document.getElementById('athleteName').value);
+                formData.append('playerId', document.getElementById('playerId').value);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "backend.php", true);
+
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        statusDisplay.textContent = 'Status: ' + this.responseText;
+                    } else {
+                        statusDisplay.textContent = 'Error: ' + this.status;
+                    }
+                };
+
+                xhr.onerror = function() {
+                    statusDisplay.textContent = 'Error: AJAX request failed.';
+                };
+
+                xhr.send(formData);
+            }
+
+            document.querySelectorAll('button').forEach(function(button) {
+                button.addEventListener('mousedown', function() {
+                    this.classList.add('button-pressed');
+                });
+
+                button.addEventListener('mouseup', function() {
+                    this.classList.remove('button-pressed');
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    this.classList.remove('button-pressed');
+                });
+            });
+        
+        });
+    </script>
+</body>
+</html>
