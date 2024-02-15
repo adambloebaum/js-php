@@ -1,4 +1,4 @@
-# js-php
+# webdev
 
 a collection of projects written in JS / PHP
 
