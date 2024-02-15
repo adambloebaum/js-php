@@ -12,11 +12,11 @@ this site interacts with obs studio 30.0.2 and uses obs websocket 4.x compat
 
 ### citation transactions
 
-a js script for issuing a parking citation, designed to be implemented within a larger database system
+a js script for issuing a parking citation with the related sql transaction script, designed to be implemented within a larger database system
 
 ### permit transactions
 
-a js script for inserting a new parking permit, designed to be implemented within a larger database system
+a js script for inserting a new parking permit with the related sql transaction script , designed to be implemented within a larger database system
 
 ### formula 1 sound visualization
 
