@@ -1,6 +1,6 @@
 # webdev
 
-a collection of projects written with js, php, html, and css
+web development projects written with js, php, html, and css
 
 ## obs control panel
 
