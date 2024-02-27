@@ -11,11 +11,6 @@ OBS Control Panel is a dynamic website that leverages a range of technologies to
 - [Features](#features)
 - [Dependencies](#dependencies)
 - [Configuration](#configuration)
-- [Documentation](#documentation)
-- [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
-- [Contributors](#contributors)
-- [License](#license)
 
 ## Installation
 
