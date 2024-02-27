@@ -23,7 +23,7 @@ OBS Control Panel is a dynamic website that leverages a range of technologies to
 2. Clone the repository or download the project files to your local machine.
 3. Use the provided Dockerfile to build and run the container, which sets up the necessary environment.
 
-   ```
+   ```bash
    docker build -t obs-control-panel .
    docker run -p 80:80 obs-control-panel
    ```
@@ -49,7 +49,42 @@ This Python script is responsible for starting the recording in OBS Studio via a
 - **WebSocket Connection**: 
   ```python
   ws = websocket.create_connection("ws://localhost:PORT")
+  ```
   
+- **Authentification**:
+  ```python
+  ws.send(json.dumps({"request-type": "GetAuthRequired", "message-id": "1"}))
+  response = ws.recv()
+  password = "PASSWORD"
+  salt = response['d']['authentication']['salt']
+  challenge = response['d']['authentication']['challenge']
+  ```
+
+- **Filename Formatting and Start Recording**:
+  ```python
+  timestamp_format = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+  formatted_filename = f"{filename}_{timestamp_format}"
+  ws.send(json.dumps({"request-type": "StartRecording", "message-id": "4"}))
+  ```
+
+### stop_recording.py
+This script complements `start_recording.py` by stopping the recording in OBS Studio:
+
+- **WebSocket Connection**:
+  ```python
+  ws = websocket.create_connection("ws://localhost:PORT")
+
+- **Authentification**:
+  ```python
+  if auth_response['authRequired']:
+      password = "PASSWORD"
+      # ... authentication logic ...
+  ```
+
+- **Stop Recording**:
+  ```python
+  ws.send(json.dumps({"request-type": "StopRecording", "message-id": "3"}))
+  ```
 
 ## Dependencies
 
